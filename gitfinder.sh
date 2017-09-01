@@ -4,9 +4,9 @@ cd / ; find -name ".git" -type d 2>/dev/null >~/gitfinder/gitlist
 cd / ; find -name ".git" -type d 2>/dev/null | sed "s/\/.git//" >~/gitfinder/dirlist
 
 
-for url in $(cat gitlist)
+for url in $(cat ~/gitfinder/gitlist | cut -c2-)
 do
-cd $url ; cat config 2>/dev/null
+cd $url ; cat config 2>/dev/null | grep "http"
 done
 
 
