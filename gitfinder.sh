@@ -14,5 +14,7 @@ echo Results have been saved to completedlist.txt
 #[plan]
 # Have dirlist read out line by line 
 # Have separate file for downloaded locations
+# [edit] Cat the files and see if the numbers are even or odd
+# Then use even numbers for git link and odd for download locations
 # Maybe add a downloader in the future
 #
