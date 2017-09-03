@@ -1,11 +1,12 @@
 #!/bin/bash
 echo Searching for git repositories...
-cd / ; find -name ".git" -type d 2>/dev/null >~/gitfinder/gitlist
+startingpoint=$(pwd)
+cd / ; find -name ".git" -type d 2>/dev/null >$startingpoint/gitlist
 
 
-for url in $(cat ~/gitfinder/gitlist | grep -v dradis | cut -c2-)
+for url in $(cat $startingpoint/gitlist | grep -v dradis | cut -c2-)
 do
-cd $url ;  cat config 2>/dev/null | grep "http" | cut -c8- >>~/gitfinder/completedlist.txt ; cd .. && pwd >>~/gitfinder/completedlist.txt 
+cd $url ;  cat config 2>/dev/null | grep "http" | cut -c8- >>$startingpoint/completedlist.txt ; cd .. && pwd >>$startingpoint/completedlist.txt 
 done
 echo Results have been saved to completedlist.txt
 
