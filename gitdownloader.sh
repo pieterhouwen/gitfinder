@@ -1,4 +1,17 @@
+#!/bin/bash
+HOST=$(cat /etc/hostname)
+echo You probably should begin by installing (some) packages.
+echo
+echo First we need to make sure you have the right package list..
+read gebruiker
+scp -P 334 $gebruiker@tiki.pieterhouwen.info:/home/$gebruiker/$HOST /tmp/pkglist.txt
 curdir=$(pwd)
+echo Updating the package cache...
+apt-get update >/dev/null
+for package in $(cat /tmp/pkglist.txt)
+do
+apt-get install -y $package
+done
 
 function helloworld(){
 echo Begin git cloning. . .
