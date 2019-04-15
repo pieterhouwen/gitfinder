@@ -1,70 +1,5 @@
 curdir=$(pwd)
 
-function stabbie() {
-
-# ================================
-function urlcheck() {
-echo Input your gitlist URL
-read url1
-echo please input the dirlist url
-read url2
-echo is this information correct
-echo gitlist = $url1
-echo dirlist = $url2
-select yn in "Yes" "No"; do
-case $yn in
-Yes )
-break
-;;
-No ) 
-read url1
-echo 'now the urllist = '$url1
-read url2
-echo 'now dirlist = '$url2
-echo is this correct?
-# ========
-select yn in "Yes" "No"; do
-case $yn in
-Yes )
-break
-;;
-No )
-urlcheck
-;;
-esac
-done
-# =======
-;;
-esac
-done
-}
-# ==============================
-
-echo Hi want to get your lists from pastebin?
-options=("Yes, use PasteBin" "No, don't use PasteBin")
-select opt in "${options[@]}"
-do
-case $opt in
-"Yes, use PasteBin")
-urlcheck
-key=$(echo  $url | cut -d "/" -f4-)
-curl https://pastebin.com/raw/$key | base64 -d > urllist
-break
-;;
-"No, don't use PasteBin")
-echo "Alrighty then. Just use the urllist and dirlist." 
-echo "Have a nice day!"
-break
-;;
-esac
-done
-}
-
-stabbie
-
-echo end test
-
-
 function helloworld(){
 echo Begin git cloning. . .
 paste urllist dirlist | while read url dir
@@ -103,8 +38,3 @@ do
 make $makef clean 2>>$curdir/makelog ; make $makef 2>>$curdir/makelog ; make $makef install 2>>$curdir/makelog
 done
 
-#function searchfiles {
-#for file in $(cat dirlist)
-#do 
-#cd $file && find -name $1 
-}
